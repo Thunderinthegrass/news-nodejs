@@ -1,15 +1,26 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Приложеньице | <%= title %></title>
-    <link rel="stylesheet" href="/main.css">
-</head>
-<body>
-  <h1>Добавляем пост</h1>
-  <%- include('./partials/nav.ejs')%>
+<%- include('./partials/head.ejs')%>
+<body class="new-post-body">
+  <div class="container">
+    <%- include('./partials/nav.ejs')%>
+    <h1>Добавляем пост</h1>
+    <form action="/add-post" method="post" id="post-form">
+      <div class="form-info">
+        <label>Заголовок поста
+          <input type="text" name="title">
+        </label>
+        <label>Кто автор
+          <input type="text" name="author">
+        </label>
+      </div>
+      <div class="form-text">
+        <label>Текст поста
+          <textarea name="text" rows="8" cols="80"></textarea>
+        </label>
+      </div>
+      <input type="submit">
+    </form>
+  </div>
 </body>
 </html>

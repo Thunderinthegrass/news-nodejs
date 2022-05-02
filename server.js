@@ -6,7 +6,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-const PORT = 3000;
+const PORT = 3002;
 
 const createPath = (page) => path.resolve(__dirname, 'ejs-views', `${page}.ejs`);
 
@@ -15,6 +15,8 @@ app.listen(PORT, (error) => {
 })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));//логгер, показывающий в консоли разную инфу
+
+app.use(express.urlencoded({ extended: false }))//метод для парсинга входящего запроса
 
 app.use(express.static('styles')); //express.static - метод, добавляющий папку styles в исключения, то есть делающий её общедоступной
 
@@ -35,12 +37,40 @@ app.get('/contacts', (req, res) => {
 
 app.get('/posts/:id', (req, res) => {
   const title = 'Post';
-  res.render(createPath('post'), { title });//заголовок создавать не нужно, express автоматически определяет тип данных
+  const post = {
+    id: '1',
+    text: 'Грунты - горные породы различного состава, свойств и происхождения, слагающие верхние слои земной коры, подверженные процессам выветривания',
+    title: 'Первый пост',
+    date: '02.05.2022',
+    author: 'Сашок'
+  }
+  res.render(createPath('post'), { title, post });//заголовок создавать не нужно, express автоматически определяет тип данных
 })
 
 app.get('/posts', (req, res) => {
   const title = 'Posts';
-  res.render(createPath('posts'), { title });//заголовок создавать не нужно, express автоматически определяет тип данных
+  const posts = [
+    {
+      id: '1',
+      text: 'Грунты - горные породы различного состава, свойств и происхождения, слагающие верхние слои земной коры, подверженные процессам выветривания',
+      title: 'Первый пост',
+      date: '02.05.2022',
+      author: 'Сашок'
+    }
+  ]
+  res.render(createPath('posts'), { title, posts });//заголовок создавать не нужно, express автоматически определяет тип данных
+})
+
+app.post('/add-post', (req, res) => {//создание нового поста
+  const { title, author, text } = req.body;
+  const post = {
+    id: new Date(),
+    date: (new Date()).toLocaleDateString(),
+    title,
+    author,
+    text,
+  }
+  res.render(createPath('post'), { post, title });
 })
 
 app.get('/add-post', (req, res) => {

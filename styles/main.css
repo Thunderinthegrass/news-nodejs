@@ -1,7 +1,52 @@
+body{
+  font-family: sans-serif;
+}
 li{
   list-style: none;
 }
 a{
   color: #212121;
   text-decoration: none;
+}
+h1{
+  text-align: center;
+}
+.container{
+  margin: 0 auto;
+  max-width: 1140px;
+  padding: 0 15px;
+  width: 100%;
+}
+.header__nav{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+}
+.header__nav ul{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+}
+.header__nav li{
+  margin: 10px;
+}
+.contacts .header-nav__item_contacts{
+  background: rgba(189, 252, 254, 0.99);
+}
+.main-body .header-nav__item_home{
+  background: rgba(189, 252, 254, 0.99);
+}
+.posts-body .header-nav__item_posts{
+  background: rgba(189, 252, 254, 0.99);
+}
+.new-post-body .header-nav__item_new-post{
+  background: rgba(189, 252, 254, 0.99);
+}
+.post-text{
+  font-size: 17px;
+}
+.post-date, .post-author{
+  color: #5b5555;
+  font-size: 14px;
 }
